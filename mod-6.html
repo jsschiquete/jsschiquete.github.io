@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 6 | El campo laboral de la investigación clínica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets//favicon-16x16.png">
+    <link rel="manifest" href="assets//site.webmanifest">
+    <style>
+        :root {
+            --primary: #2D71B8;
+            --secondary: #1a4d8c;
+            --accent: #3F8FD2;
+            --light: #F0F7FF;
+            --dark: #1f1f1f;
+            --text: #333;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8fcff 0%, #e6f2ff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* HEADER - IDÉNTICO AL LANDING PAGE */
+        .main-header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 20px;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        .main-content {
+            flex: 1;
+            padding: 20px 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .module-hero {
+            text-align: center;
+            padding: 40px 20px;
+            margin: 0 auto 40px;
+            max-width: 800px;
+        }
+        
+        .module-page-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .module-page-subtitle {
+            text-align: center;
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .module-description {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid rgba(45, 113, 184, 0.1);
+        }
+        
+        /* Linktree Grid */
+        .linktree-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        
+        .link-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(45, 113, 184, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
+        }
+        
+        .link-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .link-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .link-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            line-height: 1.7;
+        }
+        
+        .link-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            border: 2px solid transparent;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .link-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 113, 184, 0.3);
+        }
+        
+        .link-btn i {
+            margin-left: 8px;
+            font-size: 0.9em;
+        }
+        
+        /* Module Navigation */
+        .module-nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .nav-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 113, 184, 0.3);
+        }
+        
+        .nav-btn i {
+            margin-right: 8px;
+        }
+        
+        /* FOOTER - IDÉNTICO AL LANDING PAGE */
+        .main-footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            margin-top: auto;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .module-page-title {
+                font-size: 2rem;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .module-nav {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .linktree-grid {
+                gap: 20px;
+            }
+            
+            .footer-grid {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header idéntico al de la landing page -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="#">
+                    <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_auto/1187729/437761_723752.png" 
+                         alt="Logo Academia Digital" 
+                         class="logo-img">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="index.html#modules"><i class="fas fa-book"></i> Módulos</a></li>
+                    <li><a href="#"><i class="fas fa-calendar"></i> Calendario</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Soporte</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="module-hero">
+                <h1 class="module-page-title">Módulo 6: El campo laboral de la investigación clínica</h1>
+                <p class="module-page-subtitle">Material de consulta y recursos para el módulo</p>
+                
+                <div class="module-description">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi optio, praesentium nisi vero vel facilis quia saepe, accusantium veritatis possimus in, tempora dolor nihil repellendus unde iusto minus dolores quae?</p>
+                </div>
+            </section>
+            
+            <section class="linktree-section">
+                <div class="linktree-grid">
+                    <!-- Actividad 1 -->
+                    <div class="link-card">
+                        <div class="link-number">1</div>
+                        <h3 class="link-title">Introducción Conceptual</h3>
+                        <p class="link-desc">Aprende los conceptos básicos y fundamentos teóricos que sustentan esta tecnología. Documento esencial para iniciar tu aprendizaje.</p>
+                        <a href="#" class="link-btn">Acceder al material <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <!-- Actividad 2 -->
+                    <div class="link-card">
+                        <div class="link-number">2</div>
+                        <h3 class="link-title">Instalación y Configuración</h3>
+                        <p class="link-desc">Guía paso a paso para instalar y configurar tu entorno de desarrollo. Incluye soluciones a problemas comunes.</p>
+                        <a href="#" class="link-btn">Ver tutorial <i class="fas fa-play-circle"></i></a>
+                    </div>
+                    
+                    <!-- Actividad 3 -->
+                    <div class="link-card">
+                        <div class="link-number">3</div>
+                        <h3 class="link-title">Primer Proyecto Práctico</h3>
+                        <p class="link-desc">Implementa tu primer proyecto siguiendo las mejores prácticas. Plantillas y ejemplos incluidos.</p>
+                        <a href="#" class="link-btn">Comenzar proyecto <i class="fas fa-laptop-code"></i></a>
+                    </div>
+                    
+                    <!-- Actividad 4 -->
+                    <div class="link-card">
+                        <div class="link-number">4</div>
+                        <h3 class="link-title">Sesión en Vivo Q&A</h3>
+                        <p class="link-desc">Resuelve tus dudas con nuestros instructores en esta sesión en vivo. Agenda disponible para diferentes horarios.</p>
+                        <a href="#" class="link-btn">Registrarse <i class="fas fa-video"></i></a>
+                    </div>
+                    
+                    <!-- Actividad 5 -->
+                    <div class="link-card">
+                        <div class="link-number">5</div>
+                        <h3 class="link-title">Laboratorio de Pruebas</h3>
+                        <p class="link-desc">Entorno interactivo para practicar los conceptos aprendidos. Ejercicios guiados con retroalimentación inmediata.</p>
+                        <a href="#" class="link-btn">Iniciar laboratorio <i class="fas fa-flask"></i></a>
+                    </div>
+                    
+                    <!-- Actividad 6 -->
+                    <div class="link-card">
+                        <div class="link-number">6</div>
+                        <h3 class="link-title">Caso de Estudio</h3>
+                        <p class="link-desc">Análisis detallado de un proyecto real implementado con esta tecnología. Incluye código fuente y documentación.</p>
+                        <a href="#" class="link-btn">Explorar caso <i class="fas fa-search"></i></a>
+                    </div>
+                    
+                    <!-- Actividad 7 -->
+                    <div class="link-card">
+                        <div class="link-number">7</div>
+                        <h3 class="link-title">Guía de Referencia</h3>
+                        <p class="link-desc">Documento de consulta rápida con comandos, sintaxis y buenas prácticas. Descarga disponible en PDF.</p>
+                        <a href="#" class="link-btn">Descargar guía <i class="fas fa-file-pdf"></i></a>
+                    </div>
+                    
+                    <!-- Actividad 8 -->
+                    <div class="link-card">
+                        <div class="link-number">8</div>
+                        <h3 class="link-title">Evaluación de Conceptos</h3>
+                        <p class="link-desc">Test interactivo para evaluar tu comprensión de los temas principales. Resultados con retroalimentación detallada.</p>
+                        <a href="#" class="link-btn">Realizar evaluación <i class="fas fa-check-circle"></i></a>
+                    </div>
+                    
+                    <!-- Actividad 9 -->
+                    <div class="link-card">
+                        <div class="link-number">9</div>
+                        <h3 class="link-title">Foro de Discusión</h3>
+                        <p class="link-desc">Espacio para compartir dudas, soluciones y experiencias con otros estudiantes y mentores.</p>
+                        <a href="#" class="link-btn">Participar <i class="fas fa-comments"></i></a>
+                    </div>
+                    
+                    <!-- Actividad 10 -->
+                    <div class="link-card">
+                        <div class="link-number">10</div>
+                        <h3 class="link-title">Recursos Adicionales</h3>
+                        <p class="link-desc">Colección de artículos, videos y tutoriales recomendados para profundizar en los temas.</p>
+                        <a href="#" class="link-btn">Explorar recursos <i class="fas fa-book-open"></i></a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Navegación entre módulos -->
+            <div class="module-nav">
+                <a href="mod-5.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Módulo Anterior</a>
+                <a href="index.html" class="nav-btn"> Inicio<i class="fas fa-home"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer idéntico al de la landing page -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Academia Digital</h3>
+                    <p>Transformando carreras a través de educación de calidad en tecnología y habilidades digitales.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Módulos</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Precios</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Testimonios</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Tutoriales</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentación</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Centro de Ayuda</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@cursodigital.com</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Ciudad de México, MX</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Academia Digital. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

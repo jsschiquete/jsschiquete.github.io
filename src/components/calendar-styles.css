@@ -1,0 +1,45 @@
+
+/* ESTILOS PARA LOS ESTATUS DE EVENTOS */
+/* AQUÍ PUEDES CAMBIAR LOS COLORES DE CADA ESTATUS */
+
+.status-delivered {
+  background-color: #4CAF50 !important; /* Verde para entregado */
+}
+
+.status-pending {
+  background-color: #FF9800 !important; /* Naranja para pendiente */  
+}
+
+.status-delayed {
+  background-color: #F44336 !important; /* Rojo para retrasado */
+}
+
+/* EJEMPLO PARA AGREGAR NUEVOS ESTATUS: */
+/* 
+.status-completed {
+  background-color: #2196F3 !important; 
+}
+
+.status-cancelled {
+  background-color: #9E9E9E !important;
+}
+*/
+
+/* Animaciones para el calendario */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease;
+}

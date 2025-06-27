@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a la investigación clínica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2D71B8;
+            --secondary: #1a4d8c;
+            --accent: #3F8FD2;
+            --light: #F0F7FF;
+            --dark: #1f1f1f;
+            --text: #333;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8fcff 0%, #e6f2ff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            margin: 30px 0 50px;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: var(--radius);
+            color: white;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid transparent;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Modules Section */
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .module-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(45, 113, 184, 0.1);
+        }
+        
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .module-header {
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .module-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            line-height: 40px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .module-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .module-content {
+            padding: 25px;
+        }
+        
+        .module-content ul {
+            list-style: none;
+        }
+        
+        .module-content li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .module-content li:last-child {
+            border-bottom: none;
+        }
+        
+        .module-content li i {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        
+        .module-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            background: var(--primary);
+            color: white;
+        }
+        
+        .module-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        /* Features Section */
+        .features {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 60px 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 80px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            background: var(--light);
+            border: 1px solid rgba(45, 113, 184, 0.1);
+        }
+        
+        .feature-card:hover {
+            background: var(--white);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 28px;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* Module Page Styles */
+        .module-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0 80px;
+        }
+        
+        .module-page-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .module-page-subtitle {
+            text-align: center;
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .linktree-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .link-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(45, 113, 184, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
+        }
+        
+        .link-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .link-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .link-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .link-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            border: 2px solid transparent;
+        }
+        
+        .link-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 113, 184, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            margin-top: 80px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Page Navigation */
+        .page-navigation {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 15px;
+        }
+        
+        .page-btn {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .page-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        /* Active Page Indicator */
+        .active-page {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 0 5px;
+        }
+        
+        .current-page {
+            background: var(--secondary);
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing Page Principal -->
+    <div id="landing-page">
+        <div class="container">
+            <header>
+                <div class="logo">
+                    <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_auto/1187729/437761_723752.png" alt="Sioltalife" class="logo-img">
+                    <div class="logo-text">Sioltalife Educación Continua</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a href="#modules"><i class="fas fa-book"></i> Módulos</a></li>
+                        <li><a href="#"><i class="fas fa-calendar"></i> Calendario</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Soporte</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Introducción a la investigación clínica y su campo laboral en México</h1>
+                    <p>Accede a nuestro curso profesional con material actualizado, mentorías personalizadas y proyectos prácticos para impulsar tu carrera</p>
+                    <div class="hero-btns">
+                        <a href="#modules" class="btn">Explorar módulos</a>
+                       
+                    </div>
+                </div>
+            </section>
+            
+            <section id="modules">
+                <h2 class="section-title">Módulos del Curso</h2>
+                <div class="modules-grid">
+                    <!-- Módulo 1 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-number">1</div>
+                            <h3 class="module-title">Introducción a la Investigación Clínica</h3>
+                        </div>
+                        <div class="module-content">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Fases del desarrollo de un medicamento</li>
+                                <li><i class="fas fa-check-circle"></i> ¿Para qué hacemos investigación? </li>
+                                <li><i class="fas fa-check-circle"></i> ¿Qué es la investigación clínica?</li>
+                                <li><i class="fas fa-check-circle"></i> Historia y evolución de la investigación clínica</li>
+                            </ul>
+                            <a href="#module1" class="btn module-btn">Acceder al módulo</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Módulo 2 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-number">2</div>
+                            <h3 class="module-title">Desarrollo Avanzado</h3>
+                        </div>
+                        <div class="module-content">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Técnicas intermedias</li>
+                                <li><i class="fas fa-check-circle"></i> Flujos de trabajo</li>
+                                <li><i class="fas fa-check-circle"></i> Optimización</li>
+                                <li><i class="fas fa-check-circle"></i> Prácticas recomendadas</li>
+                            </ul>
+                            <a href="#module2" class="btn module-btn">Acceder al módulo</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Módulo 3 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-number">3</div>
+                            <h3 class="module-title">Técnicas Especializadas</h3>
+                        </div>
+                        <div class="module-content">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Métodos avanzados</li>
+                                <li><i class="fas fa-check-circle"></i> Solución de problemas</li>
+                                <li><i class="fas fa-check-circle"></i> Casos de estudio</li>
+                                <li><i class="fas fa-check-circle"></i> Análisis de datos</li>
+                            </ul>
+                            <a href="#module3" class="btn module-btn">Acceder al módulo</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Módulo 4 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-number">4</div>
+                            <h3 class="module-title">Ética en Investigación Clínica</h3>
+                        </div>
+                        <div class="module-content">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Errores eticos historicos en la investigación con seres humanos</li>
+                                <li><i class="fas fa-check-circle"></i> ¿Qué es la ética en investigación en seres humanos y qué hace ética a una investigación?</li>
+                                <li><i class="fas fa-check-circle"></i> Comités de ética y su rol en la protección del sujeto</li>
+                                <li><i class="fas fa-check-circle"></i> Consentimiento informado como herramienta ética clave de un estudio clínico</li>
+                            </ul>
+                            <a href="#module4" class="btn module-btn">Acceder al módulo</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Módulo 5 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-number">5</div>
+                            <h3 class="module-title">Despliegue y Producción</h3>
+                        </div>
+                        <div class="module-content">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Estrategias de despliegue</li>
+                                <li><i class="fas fa-check-circle"></i> Monitoreo</li>
+                                <li><i class="fas fa-check-circle"></i> Escalabilidad</li>
+                                <li><i class="fas fa-check-circle"></i> Seguridad</li>
+                            </ul>
+                            <a href="#module5" class="btn module-btn">Acceder al módulo</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Módulo 6 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-number">6</div>
+                            <h3 class="module-title">Proyecto Final</h3>
+                        </div>
+                        <div class="module-content">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Desarrollo integral</li>
+                                <li><i class="fas fa-check-circle"></i> Revisión de código</li>
+                                <li><i class="fas fa-check-circle"></i> Presentación</li>
+                                <li><i class="fas fa-check-circle"></i> Retroalimentación</li>
+                            </ul>
+                            <a href="#module6" class="btn module-btn">Acceder al módulo</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="features">
+                <h2 class="section-title">Beneficios Exclusivos</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="feature-title">Certificación</h3>
+                        <p>Recibe un certificado reconocido al completar satisfactoriamente el curso.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="feature-title">Comunidad</h3>
+                        <p>Acceso a comunidad exclusiva para networking y resolución de dudas.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="feature-title">Bolsa de Trabajo</h3>
+                        <p>Conectamos a los mejores estudiantes con empresas líderes del sector.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Actualizaciones</h3>
+                        <p>Acceso permanente a actualizaciones futuras del material del curso.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h3>Sioltalife Educación Continua</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, inventore, porro laboriosam itaque numquam assumenda blanditiis dolor vel tempore totam expedita, doloribus quaerat omnis. Eaque, quidem exercitationem. Cumque, dicta odit.</p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/sioltalife"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/company/s%C3%ADoltalife/"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h3>Enlaces Rápidos</h3>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                            <li><a href="#modules"><i class="fas fa-chevron-right"></i> Módulos</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Precios</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Testimonios</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h3>Recursos</h3>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Tutoriales</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Documentación</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Centro de Ayuda</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h3>Contacto</h3>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-envelope"></i> ventas@sioltalife.com</a></li>
+                            <li><a href="http://wa.link/kcfonq" > <i class="fas fa-phone"></i> +52 729-184-8814</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Ciudad de México, MX</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    &copy; 2025 Sioltalife. Todos los derechos reservados.
+                </div>
+                
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Página de Módulo 1 (Ejemplo) -->
+    <div id="module1" class="module-page" style="display:none;">
+        <div class="container">
+            <header>
+                <div class="logo">
+                    <div class="logo-placeholder">CD</div>
+                    <div class="logo-text">CursoDigital</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#landing-page"><i class="fas fa-arrow-left"></i> Volver</a></li>
+                        <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a href="#modules"><i class="fas fa-book"></i> Módulos</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <div class="module-content">
+                <h1 class="module-page-title">Módulo 1: Fundamentos Esenciales</h1>
+                <p class="module-page-subtitle">Material de consulta y recursos para dominar los conceptos básicos</p>
+                
+                <div class="linktree-grid">
+                    <div class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 class="link-title">Guía de Estudio</h3>
+                        <p class="link-desc">Documento completo con todos los conceptos fundamentales explicados paso a paso.</p>
+                        <a href="#" class="link-btn">Descargar PDF</a>
+                    </div>
+                    
+                    <div class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3 class="link-title">Video Introducción</h3>
+                        <p class="link-desc">Clase grabada con explicación detallada de los temas principales del módulo.</p>
+                        <a href="#" class="link-btn">Ver video</a>
+                    </div>
+                    
+                    <div class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3 class="link-title">Plantillas</h3>
+                        <p class="link-desc">Archivos base para comenzar a trabajar en los ejercicios prácticos.</p>
+                        <a href="#" class="link-btn">Descargar</a>
+                    </div>
+                    
+                    <div class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="link-title">Laboratorio 1</h3>
+                        <p class="link-desc">Primer ejercicio práctico para aplicar los conceptos aprendidos.</p>
+                        <a href="#" class="link-btn">Comenzar</a>
+                    </div>
+                    
+                    <div class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3 class="link-title">Preguntas Frecuentes</h3>
+                        <p class="link-desc">Respuestas a las dudas más comunes sobre este módulo.</p>
+                        <a href="#" class="link-btn">Consultar</a>
+                    </div>
+                    
+                    <div class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3 class="link-title">Sesión de Tutoría</h3>
+                        <p class="link-desc">Agenda una sesión personalizada con nuestros instructores.</p>
+                        <a href="#" class="link-btn">Agendar</a>
+                    </div>
+                    
+                    <div class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 class="link-title">Evaluación</h3>
+                        <p class="link-desc">Test para evaluar tu comprensión de los temas del módulo.</p>
+                        <a href="#" class="link-btn">Realizar test</a>
+                    </div>
+                    
+                    <div class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="link-title">Foro de Discusión</h3>
+                        <p class="link-desc">Espacio para compartir dudas y soluciones con otros estudiantes.</p>
+                        <a href="#" class="link-btn">Participar</a>
+                    </div>
+                </div>
+                
+                <div class="page-navigation">
+                    <a href="#" class="page-btn"><i class="fas fa-arrow-left"></i></a>
+                    <div>
+                        <span class="active-page current-page"></span>
+                        <span class="active-page"></span>
+                        <span class="active-page"></span>
+                        <span class="active-page"></span>
+                        <span class="active-page"></span>
+                        <span class="active-page"></span>
+                    </div>
+                    <a href="#module2" class="page-btn"><i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Navegación entre módulos
+        document.querySelectorAll('.module-btn, .page-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('href');
+                
+                // Ocultar todas las páginas
+                document.querySelectorAll('#landing-page, .module-page').forEach(page => {
+                    page.style.display = 'none';
+                });
+                
+                // Mostrar la página objetivo
+                document.querySelector(target).style.display = 'block';
+                
+                // Scroll al inicio de la página
+                window.scrollTo(0, 0);
+            });
+        });
+        
+        // Para el botón "Volver" en los módulos
+        document.querySelectorAll('a[href="#landing-page"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Ocultar todas las páginas
+                document.querySelectorAll('#landing-page, .module-page').forEach(page => {
+                    page.style.display = 'none';
+                });
+                
+                // Mostrar landing page
+                document.querySelector('#landing-page').style.display = 'block';
+                
+                // Scroll al inicio de la página
+                window.scrollTo(0, 0);
+            });
+        });
+    </script>
+</body>
+</html>
